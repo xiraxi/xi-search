@@ -3,6 +3,10 @@ class SearchController < ApplicationController
   def index
     @groups = []
     XiSearch::AvailableModels.each do |model|
+      if model.kind_of?(Proc)
+        model = model.call
+      end
+
       results = model.with_words(params[:q]).limit(6).all
 
       if results.size > 0
