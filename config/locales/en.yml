@@ -1,0 +1,4 @@
+en:
+  search:
+    title: "Results for your search"
+    see_more: "See more for %{group}"

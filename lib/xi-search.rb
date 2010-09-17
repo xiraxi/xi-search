@@ -1,9 +1,25 @@
 
 class XiSearch < Rails::Engine
+
+  AvailableModels = []
+
+  def self.use_model(model)
+    AvailableModels << model
+  end
+
+  config.to_prepare do
+    AvailableModels.clear
+    Rails.application.railties.engines.each do |engine|
+      search_config = engine.root.join("config", "search.rb")
+      if search_config.exist?
+        load search_config
+      end
+    end
+  end
+
 end
 
 ActiveSupport.on_load(:active_record) do
   require 'xi-search/models'
-  extend XiSearch::ModelHelpers
+  include XiSearch::ModelHelpers
 end
-

@@ -1,0 +1,4 @@
+es:
+  search:
+    title: "Resultados para tu búsqueda"
+    see_more: "Ver más de %{group}"
