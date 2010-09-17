@@ -2,3 +2,7 @@ en:
   search:
     title: "Results for your search"
     see_more: "See more for %{group}"
+
+    form:
+      initial_text: Text to search
+      label: Search
