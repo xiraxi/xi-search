@@ -2,7 +2,10 @@ class SearchController < ApplicationController
 
   def index
     @groups = []
-    XiSearch::AvailableModels.each do |model|
+    XiSearch::AvailableModels.each do |item|
+      model = item[:model]
+      options = item[:options]
+
       if model.kind_of?(Proc)
         model = model.call
       end
@@ -12,7 +15,7 @@ class SearchController < ApplicationController
       if results.size > 0
         @groups << {
           :model => model.kind_of?(ActiveRecord::Relation) ? model.klass : model,
-          :show_more => (results.size > 5),
+          :show_more => options[:show_more] != false && (results.size > 5),
           :items => results[0, 5]
         }
       end

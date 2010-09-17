@@ -3,8 +3,8 @@ class XiSearch < Rails::Engine
 
   AvailableModels = []
 
-  def self.use_model(model)
-    AvailableModels << model
+  def self.use_model(model, options = {})
+    AvailableModels << { :model => model, :options => options }
   end
 
   config.to_prepare do
