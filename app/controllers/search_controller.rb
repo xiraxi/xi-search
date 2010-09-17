@@ -7,7 +7,7 @@ class SearchController < ApplicationController
 
       if results.size > 0
         @groups << {
-          :model => model,
+          :model => model.kind_of?(ActiveRecord::Relation) ? model.klass : model,
           :show_more => (results.size > 5),
           :items => results[0, 5]
         }
