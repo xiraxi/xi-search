@@ -2,6 +2,7 @@ en:
   search:
     title: "Results for your search"
     see_more: "See more for %{group}"
+    no_results: No results found
 
     form:
       initial_text: Text to search

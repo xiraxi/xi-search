@@ -2,15 +2,22 @@
 %h1
   = t "search.title"
 
-- @groups.each do |group|
+- if @groups.empty?
 
-  %h2
-    = group_name = t("search.group.#{group[:model].name.underscore.gsub("/", ".")}.title")
+  %p.no-results
+    = t "search.no_results"
 
-  %ul
-    - group[:items].each do |item|
-      %li
-        = link_to item.search_label, polymorphic_path(item)
+- else
 
-  - if group[:show_more]
-    = link_to t("search.see_more", :group => group_name), polymorphic_path(group[:model], :q => params[:q])
+  - @groups.each do |group|
+
+    %h2
+      = group_name = t("search.group.#{group[:model].name.underscore.gsub("/", ".")}.title")
+
+    %ul
+      - group[:items].each do |item|
+        %li
+          = link_to item.search_label, polymorphic_path(item)
+
+    - if group[:show_more]
+      = link_to t("search.see_more", :group => group_name), polymorphic_path(group[:model], :q => params[:q])
